@@ -9,4 +9,3 @@ FROM alpine:3.22
 WORKDIR /app
 COPY --from=builder /app/discord-bot .
 CMD ["./discord-bot"]
-

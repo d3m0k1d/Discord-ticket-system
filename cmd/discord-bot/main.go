@@ -1,1 +1,1 @@
-package discord_bot
+package main
