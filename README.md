@@ -7,7 +7,8 @@ A universal and configurable ticketing system for Discord with full management v
 2. [Features](#features)
 3. [Requirements](#requirements)
 4. [Installation](#installation)
-5. [License](#license)
+5. [Endpoints](#endpoints)
+6. [License](#license)
 
 
 ## Overview
@@ -44,6 +45,15 @@ docker build -t discord-bot -f cmd/discord-bot/Dockerfile .
 ```bash
 docker compose up -d
 ```
+
+## Endpoints
+| Method | Path                    | Description                   |
+|--------|-------------------------|-------------------------------|
+| GET    | `/tickets`              | Get the tickets list          |
+| POST   | `/tickets`              | Create new ticket             |
+| GET    | `/tickets/{id}`         | Get the ticket by id          |
+| PATCH  | `/tickets/{id}`         | Update ticket (status)        |
+| DELETE | `/tickets/{id}`         | Close the ticket              |
 
 
 ## License
