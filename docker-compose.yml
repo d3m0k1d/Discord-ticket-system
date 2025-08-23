@@ -23,6 +23,18 @@ services:
     networks:
       - prod
 
+  api_gateway:
+    build:
+      context: .
+      dockerfile: cmd/api-gateway/Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    networks:
+      - prod
+
+
 
 volumes:
   pgdata:
