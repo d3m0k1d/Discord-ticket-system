@@ -34,7 +34,7 @@ All server members can create tickets via the Discord bot, and admins/moderators
 git clone https://github.com/d3m0k1d/Discord-ticket-system.git
 cd Discord-ticket-system
 ```
-2. Build the Docker images
+2. Build the Docker images(if you not use compose)
 ```bash
 docker build -t api-gateway -f cmd/api-gateway/Dockerfile .
 docker build -t telegram-bot -f cmd/telegram-bot/Dockerfile .
