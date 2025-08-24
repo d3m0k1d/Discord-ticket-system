@@ -39,6 +39,7 @@ func main() {
 		v1.GET("/tickets/:id", GetTicketByID)
 		v1.POST("/tickets", CreateTicket)
 		v1.DELETE("/tickets/:id", DeleteTicket)
+		v1.PATCH("/tickets/:id", PatchTicket)
 	}
 	r.Run("0.0.0.0:8080")
 

@@ -54,3 +54,18 @@ func DeleteTicket(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"message": "Ticket deleted"})
 }
+
+func PatchTicket(c *gin.Context) {
+	id := c.Param("id")
+	var ticket models.Ticket
+	if err := db.Where("id = ?", id).First(&ticket).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Ticket not found"})
+	}
+	if ticket.Status == false {
+		ticket.Status = true
+		db.Save(&ticket)
+		c.JSON(http.StatusOK, ticket)
+	} else {
+		c.JSON(http.StatusOK, gin.H{"message": "Ticket already closest"})
+	}
+}
