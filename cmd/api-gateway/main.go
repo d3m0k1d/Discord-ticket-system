@@ -2,8 +2,11 @@ package main
 
 import (
 	"Discord-ticket-system/internal/models/db"
+	"fmt"
 	"log"
 	_ "net/http"
+
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -14,7 +17,14 @@ import (
 var db *gorm.DB
 
 func initDB() {
-	dsn := "host=postgres user=postgres password=postgres dbname=test port=5432 sslmode=disable"
+	host := os.Getenv("POSTGRES_HOST")
+	user := os.Getenv("POSTGRES_USER")
+	password := os.Getenv("POSTGRES_PASSWORD")
+	dbname := os.Getenv("POSTGRES_DB")
+	port := os.Getenv("POSTGRES_PORT")
+
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", host, user, password, dbname, port)
+
 	var err error
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
