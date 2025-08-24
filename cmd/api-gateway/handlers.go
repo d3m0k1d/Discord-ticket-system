@@ -9,7 +9,9 @@ import (
 )
 
 func ListTickets(c *gin.Context) {
-
+	var tickets []models.Ticket
+	db.Find(&tickets)
+	c.JSON(http.StatusOK, tickets)
 }
 func GetTicketByID(c *gin.Context) {
 
@@ -31,5 +33,18 @@ func CreateTicket(c *gin.Context) {
 	c.JSON(http.StatusOK, ticket)
 }
 func DeleteTicket(c *gin.Context) {
+	id := c.Param("id")
+	var ticket models.Ticket
 
+	if err := db.Where("id = ?", id).First(&ticket).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Ticket not found"})
+		return
+	}
+
+	if err := db.Delete(&ticket).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Ticket deleted"})
 }
