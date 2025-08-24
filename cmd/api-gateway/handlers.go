@@ -14,7 +14,13 @@ func ListTickets(c *gin.Context) {
 	c.JSON(http.StatusOK, tickets)
 }
 func GetTicketByID(c *gin.Context) {
-
+	var ticket models.Ticket
+	id := c.Param("id")
+	if err := db.Where("id = ?", id).First(&ticket).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Ticket not found"})
+		return
+	}
+	c.JSON(http.StatusOK, ticket)
 }
 func CreateTicket(c *gin.Context) {
 	var req validation.TicketRequest
