@@ -8,5 +8,5 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /app/api-gateway ./cmd/api-gateway
 FROM alpine:3.22
 WORKDIR /app
 COPY --from=builder /app/api-gateway .
-CMD ["./api-gateway"]
+CMD ["sh", "-c", "sleep 10 && ./api-gateway"]
 
